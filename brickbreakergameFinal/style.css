@@ -1,18 +1,24 @@
-
 html {
     color: red;
     padding: 0;
     margin: 0px !important;
     overflow: hidden;
    }
+body {
+    background-color: bisque;
+    color: #5599aa;
+}
 
 #gameCanvas {
-    border: 4px solid #000000;
-    margin: 50% auto;
-    display: block;
-    background:#eee;
+    border: 4px solid #5599aa;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    margin: "auto";
 }
-h1 {
+.main {
     color: blue;
     font-family: fantasy;
     font-size: 15px;

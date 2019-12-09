@@ -1,0 +1,200 @@
+html,
+body {
+    font-family: fantasy;
+    height: 900px;
+    width: 900px;
+    margin: 0;
+    text-align: center;
+}
+#img {
+    height: auto;
+    width: 100%
+}
+#container { /* <div id="container"></div> */
+    background-color: light gray;/*background: radial-gradient(circle,#1a82f7, #2F2727);*/
+    font-family: fantasy;
+    color: red;/*#d9d9d9;*/
+    display: block; /*tried flex; */
+    height: auto;
+    width: 100%;
+    margin-left: 5%;/*0 auto;*/
+    position: relative;
+    border: 2px dotted red;
+    z-index: -100;
+    overflow: hidden;
+    /*transform:translateX(100px);*/
+}
+#score { /*<div id="score"></div> */
+    color: blue;
+    text-align: center;
+    font-size: 25px;
+    top: 45%;
+    left: 30%
+    }
+h1 { /*<h1>Chase 'Em and Catch 'Em</h1>*/
+    color: orange;
+    font-size: 2px;
+    font-family: fantasy;
+    }
+h2 {
+        position: absolute;
+        font-family: fantasy;
+        top: 0px;
+        text-align: center;
+        left: 0px;
+        right: 0px;
+        padding: 5%;
+    }
+    #timer_div { /*<div id="timer_div"></div>*/
+    /*transform: rotate(8deg); yuck that was not good */
+    transition: fixed;
+    top: 16px;
+    right: 16px;
+    color: green;
+    font-size: 30px;
+    /*margin-bottom: 50px;*/
+    position: fixed;
+    z-index: -1;
+    }
+
+    
+    #user_platform {
+        height: 40px;
+        width: 85px;
+        border-radius: 10px;
+        position: absolute;
+        bottom: 5px;
+        background-color: blueviolet;
+        text-align: center;
+        z-index: 11;
+    }
+    /*#create_a_game { <button id="create">Start</button>
+        background: gradient(linear, left top, left bottom, 
+            color-stop(0.05,#2dabf9), 
+         color-stop(1, #0688fa));
+        border-radius: 3px;
+        border: 1px dotted #0b0e07;
+        display: inline-block;
+        cursor: grab;
+        color: magenta;
+        font-family: fantasy;
+        font-size: 35px;
+        padding: 20px 40px;
+        margin-top: 25%;
+        text-decoration: none;
+        text-shadow: 0px 1.8px 0px #255555;
+        
+    }
+    
+        #create:hover {
+             background-color: gray;
+        }*/
+        .bubble {
+                display: inline-block;
+                left: 0;
+                top: 0;
+                width: 40px;
+                height: 50px;
+                border-radius: 50%; /*turns a square into a circle*/
+                background-color: lightcoral;
+                /*background: transparent;*/
+                box-shadow: inset 0 0 15px 1px white; /*how does this interact with canvas- need to find out more */ 
+                /*cursor: grab; cursor tried pointer;*/
+                position: absolute; /*bubble will be able to move around screen with coordinates*/
+                bottom: -5px;
+                animation: bounce 1.45s; /*code speaking directly to bounce @keyframe*/
+                animation-timing-function: cubic-bezier(0.5, 0.9, 1, 0.9) forwards;
+                animation-direction: alternate;
+                animation-iteration-count: infinite;
+                transform: translate(-50%, -50%);
+                transition: 
+                    width 0.3s cubic-bezier(0.7, -0.6, 0.4, 1.5),
+                    height 0.6s cubic-bezier(0.7, -0.6, 0.4, 1.5),
+                    opacity 0.3s ease-out;
+            }
+            .is-popping {
+                height: 0;
+                width: 0;
+                opacity: 0;
+                animation-name: none;
+            }
+            #bubble1 {
+                left: calc(20% + 8% / 2 - 2% / 2);
+                background-color: rgb(196, 224, 131);
+            }
+            #bubble2 {
+                left: calc(50% + 8% / 2 - 2% / 2);
+                background-color: rgb(239, 243, 16);
+            }
+            #bubble3 {
+                left: calc(80% + 8% / 2 - 2% / 2);
+                background-color: rgb(61, 219, 61);
+            }
+                     #create.bubble { /*syntax error from what I had &.after*/
+                        content: '';
+                        position: absolute;
+                        top: 10px;
+                        left: 10px;
+                        width: 10px;
+                        height: 10px;
+                        background: white;
+                        opacity: 1;
+                        border-radius: 50%;
+                     }
+        .bullseye {
+            background-color: plum;
+            display: none;
+            position: absolute;
+            bottom: 0px;
+            height: 7%;
+            width: 7%;
+            z-index: 11;
+        }
+#bullseye1 {
+    left: calc( 20% + 8% / 2 - 7% /2); /*width of bubble*/
+}
+#bullseye2 {
+    left: calc( 40% + 8% / 2 - 7% /2);
+}
+#bullseye3 {
+    left: calc( 80% + 8% / 2 - 7% /2);
+}
+#score_board {
+    position: absolute;
+    color: greenyellow;
+    font-size: 30px;
+    top: 45%;
+    left: 30%
+}
+#floor {
+    position: absolute;
+    height: 4%;
+    width: 100%;
+    background-color: #292929;
+    bottom: 0;
+    z-index: 10;
+    }
+#restart {
+    border: 0;
+    position: absolute;
+    height: 10%;
+    width: 100%;
+    color: white;
+    background-color: fuchsia;
+    top: 40%;
+    font-size: 35px;
+    cursor: crosshair;
+    display: none;
+}
+    @keyframes bounce { /*this creates bubble bounce not speed of bounce*/
+       from {
+           -webkit-transform: translate3d(0, 0, 0);
+           transform: translate3d(0, 0, 0);
+           bottom: 10;
+           animation-timing-function: ease-in;
+       }
+        to {
+            -webkit-transform: translate3d(0, 500px, 0);
+           transform: translate3d(0, 500px, 0);
+            }
+        }

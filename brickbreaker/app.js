@@ -2,36 +2,29 @@
 //render the game inside 
 //storing a reference to the <gameCanvas> creating ctx variable
 let canvas = document.getElementById("gameCanvas");
-//set the Canvas width and Height to browser for scalability
-//canvas.width = window.innerWidth;
-//canvas.height = window.innerHeight;
 let ctx = canvas.getContext("2d");
 
 //add border to canvas
-canvas.style.border = "2px solid #0ff";
+canvas.style.border = "1px solid #0ff";
 //add thickness to canvas
 ctx.lineWidth = 3;
 
 //set up variables ans constants in Global Scope
 let ballRadius = 10;
-//starting horizontal position of ball
 let x = canvas.width / 2;
-//starting vertical position of ball
 let y = canvas.height - 30;
-//amount ball should move horizontally
-let dx = 6; //try higher number to go faster
-//amount ball should move vertically
-let dy = -3;
+let dx = 2;
+let dy = -2;
 //paddle setup
-let paddleHeight = 10;//set to pixels
-let paddleWidth = 75;//set to pixels
+let paddleHeight = 10;
+let paddleWidth = 75;
 let paddleX = (canvas.width - paddleWidth) / 2;
 let rightPressed = false;
 let leftPressed = false;
 
 //set up the brick variables
-let maxBrickRowCount = 10;
-let maxBrickColumnCount = 3;
+let brickRowCount = 7;
+let brickColumnCount = 3;
 let brickWidth = 70;
 let brickHeight = 20;
 let brickPadding = 10;
@@ -46,12 +39,12 @@ let lives = 3;
 //brick drwaing funtion in an array data type
 //making bricks disappear after the are hot
 let bricks = [];
-for (let c = 0; c < maxBrickColumnCount; c++) {
+for (let c = 0; c < brickColumnCount; c++) {
   //loop through the rows and columns set x and y position
   bricks[c] = [];
-  for (let r = 0; r < maxBrickRowCount; r++) {
+  for (let r = 0; r < brickRowCount; r++) {
   //status property if status is 1 then draw it 
-  //but if it's 0 then it was hit by the ball dont show up
+  //but if its 0 then it was hit by the ball dont show up
     bricks[c][r] = { x: 0, y: 0, status: 1 };
   }
 }
@@ -87,8 +80,8 @@ function mouseMoveHandler(e) {
 //set up collision detection for canvas walls except platform floor
 
 function collisionDetection() {
-  for (let c = 0; c < maxBrickColumnCount; c++) {
-    for (let r = 0; r < maxBrickRowCount; r++) {
+  for (let c = 0; c < brickColumnCount; c++) {
+    for (let r = 0; r < brickRowCount; r++) {
       let b = bricks[c][r];
     //involve brick status the status is 1
     //if collision happens it is active
@@ -104,7 +97,7 @@ function collisionDetection() {
         //if collision occurs set the status of brick to 0, it will not be painted on screen
           b.status = 0;
           score++;
-          if (score == maxBrickRowCount * maxBrickColumnCount) {
+          if (score == brickRowCount * brickColumnCount) {
             alert("Winner Winner, CONGRATS!. That's right, it\'s not over until I win");
             document.location.reload();
           }
@@ -116,7 +109,6 @@ function collisionDetection() {
 //collision detection for creating ball 
 function drawBall() {
   ctx.beginPath();
-  //x and y coordinate is the center of the ball point
   ctx.arc(x, y, ballRadius, 0, Math.PI * 2);//draw ball inside function
   //color = (contact === true ? (color === 'green' ? 'pink' : 'green'): color);
   ctx.fillStyle = color;
@@ -129,14 +121,14 @@ function drawPaddle() {
   //if the y-value of ball position is lower than zero, change direction
   //of the movement on y-axis by setting it equal to itself
   ctx.rect(paddleX, canvas.height - paddleHeight, paddleWidth, paddleHeight);
-  ctx.fillStyle = "#3440eb";
+  ctx.fillStyle = "#42f5cb";
   ctx.fill();
   ctx.closePath();
 }
 //function for drawBricks based on veriables set up 
 function drawBricks() {
-  for (let c = 0; c < maxBrickColumnCount; c++) {
-    for (let r = 0; r < maxBrickRowCount; r++) {
+  for (let c = 0; c < brickColumnCount; c++) {
+    for (let r = 0; r < brickRowCount; r++) {
       if (bricks[c][r].status == 1) {
         let brickX = r * (brickWidth + brickPadding) + brickOffsetLeft;
         let brickY = c * (brickHeight + brickPadding) + brickOffsetTop;
@@ -144,9 +136,7 @@ function drawBricks() {
         bricks[c][r].y = brickY;
         ctx.beginPath();
         ctx.rect(brickX, brickY, brickWidth, brickHeight);
-        //canvas fill style allows me to have each brick a different color
-        ctx.fillStyle = 'rgb(' + Math.floor(255 - 42.5 * c) + ', '+
-        Math.floor(255 - 42.5 * r) + ',0)';//"#f542d4";
+        ctx.fillStyle = "#f542d4";
         ctx.fill();
         ctx.closePath();
       }
@@ -163,8 +153,8 @@ function drawScore() {
 //instead of ending the game immmediately, decrease the number of lives until gine
 function drawLives() {
   ctx.font = "20px Fantasy";
-  ctx.fillStyle = "#0345fc";
-  ctx.fillText("Lives: " + lives, canvas.width - 70, 20);
+  ctx.fillStyle = "red";
+  ctx.fillText("Lives: " + lives, canvas.width - 65, 20);
 }
 //function to draw
 function draw() {
@@ -197,7 +187,7 @@ function draw() {
         //along with movement of ball
         x = canvas.width / 2;
         y = canvas.height - 30;
-        dx = 6; //physics ya'll
+        dx = 3; //physics ya'll
         dy = -3; //physics ya'll this is direcional velocity
         paddleX = (canvas.width - paddleWidth) / 2;
       }
